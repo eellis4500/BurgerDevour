@@ -5,18 +5,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   
     // UPDATE
-    const changeSleepBtns = document.querySelectorAll('.change-sleep');
+    const changeDevouredBtns = document.querySelectorAll('.change-devoured');
   
     // Set up the event listener for the create button
-    if (changeSleepBtns) {
-      changeSleepBtns.forEach((button) => {
+    if (changeDevouredBtns) {
+      changeDevouredBtns.forEach((button) => {
         button.addEventListener('click', (e) => {
           // Grabs the id of the element that goes by the name, "id"
           const id = e.target.getAttribute('data-id');
-          const newSleep = e.target.getAttribute('data-newsleep');
+          const newDevoured = e.target.getAttribute('data-newdevoured');
   
-          const newSleepState = {
-            sleepy: newSleep,
+          const newDevouredState = {
+            devoured: newDevoured,
           };
   
           fetch(`/api/burger/${id}`, {
@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             },
   
             // make sure to serialize the JSON body
-            body: JSON.stringify(newSleepState),
+            body: JSON.stringify(newDevouredState),
           }).then((response) => {
             // Check that the response is all good
             // Reload the page so the user can see the new quote
             if (response.ok) {
-              console.log(`changed sleep to: ${newSleep}`);
+              console.log(`changed devoured to: ${newDevoured}`);
               location.reload('/');
             } else {
               alert('something went wrong!');
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   
         // Grabs the value of the textarea that goes by the name, "quote"
         const newBurger = {
-          name: document.getElementById('ca').value.trim(),
-          sleepy: document.getElementById('sleepy').checked,
+          burger_name: document.getElementById('ca').value.trim(),
+          devoured: document.getElementById('devoured').checked,
         };
   
         // Send POST request to create a new quote
